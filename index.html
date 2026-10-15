@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="UEH Buddy">
+<meta name="theme-color" content="#ffffff">
+<title>UEH Buddy</title>
+<style>
+  html, body {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    background: #ffffff;
+    touch-action: manipulation;
+  }
+  body { position: fixed; inset: 0; }
+  #app {
+    position: fixed;
+    left: 0; top: 0;
+    width: 100vw;
+    height: 100vh;                         /* trình duyệt cũ */
+    height: var(--vh-real, 100dvh);        /* đúng phần đang nhìn thấy */
+    border: 0; display: block;
+  }
+</style>
+</head>
+<body>
+<iframe id="app"
+  src="https://embed.figma.com/proto/eU4Yv2NZcifc0IyTobO5Xv/Untitled?node-id=1-290&starting-point-node-id=1%3A290&scaling=contain&content-scaling=fixed&hide-ui=1&footer=false&embed-host=uehbuddy"
+  allow="fullscreen" allowfullscreen title="UEH Buddy"></iframe>
+<script>
+  // Luôn khớp khung với vùng màn hình thật sự nhìn thấy (trừ thanh địa chỉ / thanh công cụ)
+  function fit() {
+    var h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    document.documentElement.style.setProperty('--vh-real', h + 'px');
+    window.scrollTo(0, 0);
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', function(){ setTimeout(fit, 300); });
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
+  // Chặn hiệu ứng kéo nảy của trang ngoài
+  document.addEventListener('touchmove', function(e){ if (e.target === document.body) e.preventDefault(); }, { passive: false });
+</script>
+</body>
+</html>
